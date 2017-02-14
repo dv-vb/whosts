@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>dv-vb,hxyjxxx@gmail.com</author>
  <class>whosts</class>
  <widget class="QMainWindow" name="whosts">
   <property name="geometry">
@@ -158,5 +159,22 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>confirm_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>progressBar</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

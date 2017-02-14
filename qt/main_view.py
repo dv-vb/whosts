@@ -32,6 +32,7 @@ class Ui_whosts(object):
         self.progressBar.setEnabled(False)
         self.progressBar.setGeometry(QtCore.QRect(30, 110, 511, 23))
         self.progressBar.setProperty("value", 0)
+        self.progressBar.hide()
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.load_filepath = QtGui.QToolButton(self.centralwidget)
         self.load_filepath.setGeometry(QtCore.QRect(510, 10, 50, 32))
@@ -77,6 +78,7 @@ class Ui_whosts(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(whosts)
+        QtCore.QObject.connect(self.confirm_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), self.progressBar.reset)
         QtCore.QMetaObject.connectSlotsByName(whosts)
 
     def retranslateUi(self, whosts):
