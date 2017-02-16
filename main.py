@@ -8,7 +8,7 @@ import time
 from PyQt4.Qt import *
 from PyQt4.uic import *
 
-class Proc(QThread): 
+class Uploader(QThread): 
     def __init__(self,parent=None): 
         super(Proc, self).__init__(parent) 
         self.working = True 
@@ -17,6 +17,7 @@ class Proc(QThread):
         self.working = False 
         self.wait() 
     def run(self): 
+        # will download the file, update the local file.
         if self.working==True: 
             for self.num in range(1, 101):
                 self.emit(SIGNAL('output(int)'), self.num) 
@@ -25,7 +26,7 @@ class Proc(QThread):
 class mainapp(QtGui.QMainWindow, Ui_whosts):
     def __init__(self):
         super(self.__class__, self).__init__()
-        self.thread = Proc()
+        self.thread = Uploader()
         self.setupUi(self)
         self.set_events(self)
 
@@ -56,13 +57,8 @@ class mainapp(QtGui.QMainWindow, Ui_whosts):
         self.progressBar.show()
         self.thread.start()
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     view = mainapp()
     view.show()
     app.exec_()
-    #sys.exit(app.exec_())
-    #f.setupUi()
-    #app.setMainWidget(f)
-    #app.exec_loop()
