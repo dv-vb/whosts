@@ -5,7 +5,7 @@
 # Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
-
+import time
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_whosts(object):
     def setupUi(self, whosts):
         whosts.setObjectName(_fromUtf8("whosts"))
-        whosts.resize(598, 265)
+        whosts.resize(600, 270)
         self.centralwidget = QtGui.QWidget(whosts)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.progressBar = QtGui.QProgressBar(self.centralwidget)
@@ -54,7 +54,7 @@ class Ui_whosts(object):
         self.url_lab.setGeometry(QtCore.QRect(10, 60, 170, 32))
         self.url_lab.setObjectName(_fromUtf8("url_lab"))
         self.confirm_btn = QtGui.QPushButton(self.centralwidget)
-        self.confirm_btn.setGeometry(QtCore.QRect(100, 150, 86, 32))
+        self.confirm_btn.setGeometry(QtCore.QRect(220, 150, 160, 32))
         self.confirm_btn.setObjectName(_fromUtf8("confirm_btn"))
         whosts.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(whosts)
@@ -78,8 +78,7 @@ class Ui_whosts(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(whosts)
-        QtCore.QObject.connect(self.confirm_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), self.progressBar.reset)
-        QtCore.QMetaObject.connectSlotsByName(whosts)
+        #self.setEvent(whosts)
 
     def retranslateUi(self, whosts):
         whosts.setWindowTitle(_translate("whosts", "whosts", None))
@@ -93,4 +92,15 @@ class Ui_whosts(object):
         self.menuHelp.setTitle(_translate("whosts", "help", None))
         self.actionSetting.setText(_translate("whosts", "setting", None))
         self.actionExit.setText(_translate("whosts", "exit", None))
+
+    #def setEvent(self, whosts):
+        #QtCore.QObject.connect(self.confirm_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), self.progressBar.reset)
+        #QtCore.QMetaObject.connectSlotsByName(whosts)
+        #self.confirm_btn.clicked.connect(self.confirm_clicked)
+
+
+
+
+
+
 
