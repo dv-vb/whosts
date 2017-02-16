@@ -10,12 +10,12 @@ from PyQt4.uic import *
 
 class Uploader(QThread): 
     def __init__(self,parent=None): 
-        super(Proc, self).__init__(parent) 
+        super(Uploader, self).__init__(parent) 
         self.working = True 
         self.num=0 
     def __del__(self): 
         self.working = False 
-        self.wait() 
+        self.wait()
     def run(self): 
         # will download the file, update the local file.
         if self.working==True: 
