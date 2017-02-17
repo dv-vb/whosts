@@ -9,19 +9,25 @@ import sys
 import sip
 from PyQt4.Qt import *
 from PyQt4.uic import *
+from core.cmd import *
 
 class Download(QObject):
     finishd = pyqtSignal()
     dataReady = pyqtSignal(int)
-    def __init__(self, url):
+    def __init__(self, url, tmpfilename):
         super(Download, self).__init__() 
         print(url)
         self.url = url
+        self.tmpfilename = tmpfilename
     @pyqtSlot()
     def start_download(self):
-        self.filename = "./hosts.txt"
-        urllib.request.urlretrieve(self.url, self.filename, self.report)
+        self.tmpfilename = "./hosts.txt"
+        urllib.request.urlretrieve(self.url, self.tmpfilename, self.report)
         self.finishd.emit()
+        
+    def done(self):
+        cmd = Cmd()
+        cmd.del_file(None, self.tmpfilename)
     #blocknum, blocksize, totalsize
     @pyqtSlot(int)
     def report(self, blocknum, bs, tsize):

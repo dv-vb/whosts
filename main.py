@@ -7,14 +7,17 @@ import sys
 import sip
 import qt.main_view
 from core.core import *
+from core.cmd import *
 import time
 from PyQt4.Qt import *
 from PyQt4.uic import *
 
+
 class Uploader(QThread): 
     def __init__(self,parent=None): 
         super(Uploader, self).__init__(parent) 
-        self.working = True 
+        self.working = True
+        self.tmpfile = "./tmphosts.txt"
         self.num=0 
     def __del__(self): 
         self.working = False 
@@ -24,15 +27,19 @@ class Uploader(QThread):
         self.path = path
     def run(self): 
         # will download the file, update the local file.
-        self.download = Download(self.url)
-        self.download.finishd.connect(self.quit)
+        self.download = Download(self.url, self.tmpfile)
+        self.download.finishd.connect(self.update_host)
         self.download.dataReady.connect(self.output_result)
         self.download.start_download()
         if self.working==True: 
             for delay in range(1, 101):
                 #self.emit(SIGNAL('output(int)'), self.num) 
                 self.msleep(50)
-        
+    def backup_host(self):
+        cmd = Cmd()
+    
+    def update_host(self):
+        cmd = Cmd()
     
     def output_result(self, value):
         self.num = value

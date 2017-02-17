@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 import time
 from PyQt4 import QtCore, QtGui
+import platform
+import os
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -30,7 +32,7 @@ class Ui_whosts(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.progressBar = QtGui.QProgressBar(self.centralwidget)
         self.progressBar.setEnabled(False)
-        self.progressBar.setGeometry(QtCore.QRect(30, 110, 511, 23))
+        self.progressBar.setGeometry(QtCore.QRect(50, 110, 500, 25))
         self.progressBar.setProperty("value", 0)
         self.progressBar.hide()
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
@@ -38,7 +40,7 @@ class Ui_whosts(object):
         self.load_filepath.setGeometry(QtCore.QRect(510, 10, 50, 32))
         self.load_filepath.setObjectName(_fromUtf8("load_filepath"))
         self.filepath_lab = QtGui.QLabel(self.centralwidget)
-        self.filepath_lab.setGeometry(QtCore.QRect(10, 10, 170, 32))
+        self.filepath_lab.setGeometry(QtCore.QRect(30, 10, 170, 32))
         self.filepath_lab.setObjectName(_fromUtf8("filepath_lab"))
         self.url_edit = QtGui.QLineEdit(self.centralwidget)
         self.url_edit.setGeometry(QtCore.QRect(190, 60, 370, 32))
@@ -51,7 +53,7 @@ class Ui_whosts(object):
         self.filepath_edit.setGeometry(QtCore.QRect(190, 10, 320, 32))
         self.filepath_edit.setObjectName(_fromUtf8("filepath_edit"))
         self.url_lab = QtGui.QLabel(self.centralwidget)
-        self.url_lab.setGeometry(QtCore.QRect(10, 60, 170, 32))
+        self.url_lab.setGeometry(QtCore.QRect(30, 60, 170, 32))
         self.url_lab.setObjectName(_fromUtf8("url_lab"))
         self.confirm_btn = QtGui.QPushButton(self.centralwidget)
         self.confirm_btn.setGeometry(QtCore.QRect(220, 150, 160, 32))
@@ -81,17 +83,24 @@ class Ui_whosts(object):
         #self.setEvent(whosts)
 
     def retranslateUi(self, whosts):
+        self.platform_type = platform.system()
         whosts.setWindowTitle(_translate("whosts", "whosts", None))
         self.load_filepath.setText(_translate("whosts", "...", None))
         self.filepath_lab.setText(_translate("whosts", "Backup hosts filepath", None))
         self.url_edit.setText(_translate("whosts", "https://raw.githubusercontent.com/racaljk/hosts/master/hosts", None))
-        self.filepath_edit.setText(_translate("whosts", "%SystemRoot%\\System32\\drivers\\etc\\", None))
         self.url_lab.setText(_translate("whosts", "Update hosts url", None))
         self.confirm_btn.setText(_translate("whosts", "Confirm", None))
         self.menuStart.setTitle(_translate("whosts", "start", None))
         self.menuHelp.setTitle(_translate("whosts", "help", None))
         self.actionSetting.setText(_translate("whosts", "setting", None))
         self.actionExit.setText(_translate("whosts", "exit", None))
+        if self.platform_type == 'Windows':
+            self.filepath_edit.setText(_translate("whosts", "%SystemRoot%\\System32\\drivers\\etc\\", None))
+        if self.platform_type == 'Linux':
+            self.filepath_edit.setText(_translate("whosts", "/etc/", None))
+        if self.platform_type == 'MacOS':
+            self.filepath_edit.setText(_translate("whosts", "/private/etc/", None))
+
 
     #def setEvent(self, whosts):
         #QtCore.QObject.connect(self.confirm_btn, QtCore.SIGNAL(_fromUtf8("clicked()")), self.progressBar.reset)
