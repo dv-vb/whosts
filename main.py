@@ -1,9 +1,12 @@
+# main.py create by dv-vb.
+# support email: hxyjxxx@gmail.com
 from qt import *
 from qt.view import * 
 from qt.main_view import *
 import sys
 import sip
 import qt.main_view
+from core.core import *
 import time
 from PyQt4.Qt import *
 from PyQt4.uic import *
@@ -16,12 +19,24 @@ class Uploader(QThread):
     def __del__(self): 
         self.working = False 
         self.wait()
+    def seturl_and_path(self, url, path):
+        self.url = url
+        self.path = path
     def run(self): 
         # will download the file, update the local file.
+        self.download = Download(self.url)
+        self.download.finishd.connect(self.quit)
+        self.download.dataReady.connect(self.output_result)
+        self.download.start_download()
         if self.working==True: 
-            for self.num in range(1, 101):
-                self.emit(SIGNAL('output(int)'), self.num) 
+            for delay in range(1, 101):
+                #self.emit(SIGNAL('output(int)'), self.num) 
                 self.msleep(50)
+        
+    
+    def output_result(self, value):
+        self.num = value
+        self.emit(SIGNAL('output(int)'), self.num) 
 
 class mainapp(QtGui.QMainWindow, Ui_whosts):
     def __init__(self):
@@ -55,6 +70,7 @@ class mainapp(QtGui.QMainWindow, Ui_whosts):
     def confirm_clicked(self):
         self.confirm_btn.setEnabled(False) 
         self.progressBar.show()
+        self.thread.seturl_and_path(self.url_edit.text(), self.filepath_edit.text())
         self.thread.start()
 
 if __name__ == "__main__":
