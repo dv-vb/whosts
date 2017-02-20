@@ -17,7 +17,7 @@ class Uploader(QThread):
     def __init__(self,parent=None): 
         super(Uploader, self).__init__(parent) 
         self.working = True
-        self.tmpfile = "./tmphosts.txt"
+        self.tmpfile = "./hosts"
         self.num=0 
     def __del__(self): 
         self.working = False 
@@ -30,6 +30,7 @@ class Uploader(QThread):
         self.download = Download(self.url, self.tmpfile)
         self.download.finishd.connect(self.update_host)
         self.download.dataReady.connect(self.output_result)
+        self.num = 0
         self.download.start_download()
         if self.working==True: 
             for delay in range(1, 101):
@@ -37,12 +38,21 @@ class Uploader(QThread):
                 self.msleep(50)
     def backup_host(self):
         cmd = Cmd()
+        host_file = self.path + "hosts"
+        backup_file = self.path + "hosts.bak"
+        cmd.back_file_to_path(host_file, backup_file)
     
     def update_host(self):
+        self.backup_host()
+        self.num = 75
+        self.emit(SIGNAL('output(int)'), self.num)  
         cmd = Cmd()
-    
+        cmd.cp_file_to_path(self.tmpfile, self.path)
+        self.num = 100
+        self.emit(SIGNAL('output(int)'), self.num)  
+        
     def output_result(self, value):
-        self.num = value
+        self.num = value/2
         self.emit(SIGNAL('output(int)'), self.num) 
 
 class mainapp(QtGui.QMainWindow, Ui_whosts):

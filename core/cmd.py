@@ -19,13 +19,13 @@ class Cmd(QObject):
     def del_file(self, filename, path=None):
         cmd = ""
         if self.platform_type == 'Windows':
-            cmd = "del" + " " + path + filename
+            cmd = "del" + " " + str(path) + str(filename)
         elif self.platform_type == 'Linux':
-            cmd = "rm" + " " + path + filename
+            cmd = "rm" + " " + str(path) + str(filename)
         elif self.platform_type == 'MacOS':
-            cmd = "rm" + " " + path + filename
+            cmd = "rm" + " " + str(path) + str(filename)
         else:
-            cmd = "rm" + filename
+            cmd = "rm" + str(filename)
 
         os.system(cmd)
 
@@ -33,26 +33,26 @@ class Cmd(QObject):
     def cp_file_to_path(self, filename, dstpath):
         cmd = ""
         if self.platform_type == 'Windows':
-            cmd = "copy" + " " + filename + " " + dstpath
+            cmd = "copy" + " " + str(filename) + " " + str(dstpath)
         elif self.platform_type == 'Linux':
-            cmd = "cp" + " " + filename + " " + dstpath
+            cmd = "sudo cp" + " " + str(filename) + " " + str(dstpath)
         elif self.platform_type == 'MacOS':
-            cmd = "cp" + " " + filename + " " + dstpath
+            cmd = "sudo cp" + " " + str(filename) + " " + str(dstpath)
         else:
-            cmd = "cp" + " " + filename + " " + dstpath
+            cmd = "cp" + " " + str(filename) + " " + str(dstpath)
 
         os.system(cmd)
 
-    def back_file_to_path(self, filename, backupfile, path=None, backuppath=None):
+    def back_file_to_path(self, filename, backupfile):
         cmd = ""
         if self.platform_type == 'Windows':
-            cmd = "copy" + " " + path + filename + " " + backuppath + backupfile
+            cmd = "copy" + " "  + str(filename) + " " + str(backupfile)
         elif self.platform_type == 'Linux':
-            cmd = "cp" + " " + path + filename + " " + backuppath + backupfile
+            cmd = "sudo cp" +  " "  + str(filename) + " " + str(backupfile)
         elif self.platform_type == 'MacOS':
-            cmd = "cp" + " " + path + filename + " " + backuppath + backupfile
+            cmd = "sudo cp" + " "  + str(filename) + " " + str(backupfile)
         else:
-            cmd = "cp" + " " + path + filename + " " + backuppath + backupfile
+            cmd = "cp" + " " + str(filename) + " " + str(backupfile)
 
         os.system(cmd)
     

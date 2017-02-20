@@ -27,7 +27,7 @@ except AttributeError:
 class Ui_whosts(object):
     def setupUi(self, whosts):
         whosts.setObjectName(_fromUtf8("whosts"))
-        whosts.resize(600, 270)
+        whosts.resize(600, 240)
         self.centralwidget = QtGui.QWidget(whosts)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.progressBar = QtGui.QProgressBar(self.centralwidget)
@@ -36,9 +36,6 @@ class Ui_whosts(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.hide()
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
-        self.load_filepath = QtGui.QToolButton(self.centralwidget)
-        self.load_filepath.setGeometry(QtCore.QRect(510, 10, 50, 32))
-        self.load_filepath.setObjectName(_fromUtf8("load_filepath"))
         self.filepath_lab = QtGui.QLabel(self.centralwidget)
         self.filepath_lab.setGeometry(QtCore.QRect(30, 10, 170, 32))
         self.filepath_lab.setObjectName(_fromUtf8("filepath_lab"))
@@ -50,7 +47,7 @@ class Ui_whosts(object):
         self.url_edit.setDragEnabled(True)
         self.url_edit.setObjectName(_fromUtf8("url_edit"))
         self.filepath_edit = QtGui.QLineEdit(self.centralwidget)
-        self.filepath_edit.setGeometry(QtCore.QRect(190, 10, 320, 32))
+        self.filepath_edit.setGeometry(QtCore.QRect(190, 10, 370, 32))
         self.filepath_edit.setObjectName(_fromUtf8("filepath_edit"))
         self.url_lab = QtGui.QLabel(self.centralwidget)
         self.url_lab.setGeometry(QtCore.QRect(30, 60, 170, 32))
@@ -85,7 +82,6 @@ class Ui_whosts(object):
     def retranslateUi(self, whosts):
         self.platform_type = platform.system()
         whosts.setWindowTitle(_translate("whosts", "whosts", None))
-        self.load_filepath.setText(_translate("whosts", "...", None))
         self.filepath_lab.setText(_translate("whosts", "Backup hosts filepath", None))
         self.url_edit.setText(_translate("whosts", "https://raw.githubusercontent.com/racaljk/hosts/master/hosts", None))
         self.url_lab.setText(_translate("whosts", "Update hosts url", None))

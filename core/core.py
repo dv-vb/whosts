@@ -21,7 +21,6 @@ class Download(QObject):
         self.tmpfilename = tmpfilename
     @pyqtSlot()
     def start_download(self):
-        self.tmpfilename = "./hosts.txt"
         urllib.request.urlretrieve(self.url, self.tmpfilename, self.report)
         self.finishd.emit()
         
